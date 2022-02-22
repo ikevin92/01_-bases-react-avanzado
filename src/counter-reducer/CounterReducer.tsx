@@ -1,46 +1,12 @@
 import { useReducer } from 'react';
-
-interface CounterState {
-  counter: number;
-  previous: number;
-  changes: number;
-}
+import { CounterState } from './interfaces/interfaces';
+import { counterReducer } from './state/counterReducer';
 
 // estado inicial del reducer
 const INITIAL_STATE: CounterState = {
   counter: 10,
   previous: 0,
   changes: 0,
-};
-
-// tipo para las actions del reduce
-type CounterAction =
-  | { type: 'increaseBy'; payload: { value: number } }
-  | { type: 'reset' };
-
-export const counterReducer = (
-  state: CounterState,
-  action: CounterAction,
-): CounterState => {
-  switch (action.type) {
-    case 'reset':
-      return {
-        counter: 0,
-        previous: 0,
-        changes: 0,
-      };
-
-    case 'increaseBy':
-      return {
-        ...state,
-        changes: state.changes + 1,
-        previous: state.counter,
-        counter: action.payload.value + state.counter,
-      };
-
-    default:
-      return state;
-  }
 };
 
 const CounterReducerComponent = () => {
@@ -56,7 +22,7 @@ const CounterReducerComponent = () => {
 
   return (
     <>
-      <h1>Counter Reducer: {state.counter}</h1>
+      <h1>Counter Reducer Segmentado: {state.counter}</h1>
       <pre>{JSON.stringify(state, null, 2)}</pre>
 
       <button onClick={() => increaseBy(1)}>+1</button>
